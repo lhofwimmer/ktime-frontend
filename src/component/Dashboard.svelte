@@ -5,6 +5,8 @@
   import { fade } from "svelte/transition";
   import { Router, Route, links } from "svelte-routing";
 
+  import { Shadow } from "svelte-loading-spinners";
+
   import Employee from "./dashboard/main/Employee.svelte";
   import Schedule from "./dashboard/main/Schedule.svelte";
   import Overview from "./dashboard/main/Overview.svelte";
@@ -257,7 +259,8 @@
                 focus:outline-none focus:shadow-outline"
                 id="user-menu"
                 aria-label="User menu"
-                aria-haspopup="true">
+                aria-haspopup="true"
+                on:click={() => (profileMenuOpen = !profileMenuOpen)}>
                 <img
                   class="h-8 w-8 rounded-full"
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -276,7 +279,8 @@
             -->
             <div
               class="origin-top-right absolute right-0 mt-2 w-48 rounded-md
-              shadow-lg transition ease-in-out duration-75 {mobileMenuOpen ? 'transform opacity-0 scale-95' : ' transform opacity-100 scale-100'}">
+              shadow-lg transition ease-in-out duration-75 {mobileMenuOpen ? 'transform opacity-0 scale-95' : ' transform opacity-100 scale-100'}"
+              class:hidden={!profileMenuOpen}>
               <div
                 class="py-1 rounded-md bg-white shadow-xs"
                 role="menu"
@@ -317,15 +321,11 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <!-- Replace with your content -->
         <Router>
-          <Route path="employee/:id" let:params>
-            <Employee id={params.id} />
-          </Route>
-          <Route path="schedule/:id" let:params>
-            <Schedule employeeId={params.employeeId} />
-          </Route>
-          <Route path="/*" component={Overview} />
+          <Route path="employee/:id" component={Employee} />
+          <Route path="schedule/:employeeId" component={Schedule} />
           <Route path="schedules" component={ScheduleList} />
           <Route path="employees" component={EmployeeList} />
+          <Route path="/*" component={Overview} />
         </Router>
         <!-- /End replace -->
       </div>
