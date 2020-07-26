@@ -1,5 +1,5 @@
 <script>
-  export let scheduleId;
+  export let employeeId;
 </script>
 
-chedule
+<pre>selectedEmployeeId: {employeeId}</pre>
