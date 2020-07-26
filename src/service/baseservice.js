@@ -1,4 +1,4 @@
-import { authToken, user } from '../store/stores.js';
+import { authToken } from '../store/stores.js';
 import { get as getStore } from 'svelte/store';
 import { navigate } from 'svelte-routing';
 import { getAllDateProperties } from '../util/util.js';
