@@ -1,14 +1,5 @@
 import { writable } from 'svelte/store';
 
-// function createUserStore() {
-//     const { subscribe, update, set } = writable(null);
-
-//     return {
-//         subscribe,
-
-//     }
-// }
-
 function createAuthStore() {
     const { subscribe, update, set } = writable(localStorage.getItem('token') || '');
 
@@ -19,16 +10,6 @@ function createAuthStore() {
             localStorage.setItem('token', value);
         },
         reset: () => set('')
-    }
-}
-
-function createUserStore() {
-    const { subscribe, update, set } = writable({});
-
-    return {
-        subscribe,
-        set,
-        reset: () => set({})
     }
 }
 
