@@ -1,6 +1,7 @@
 <script>
   // import { getEmployees } from "../../service/userservice.js";
   // import { onMount } from "svelte";
+  import { link } from "svelte-routing";
 
   const dateFormatter = new Intl.DateTimeFormat("de-AT");
 
@@ -51,9 +52,9 @@
                 class="px-6 py-4 whitespace-no-wrap text-right border-b
                 border-gray-200 text-sm leading-5 font-medium">
                 <a
-                  href="#"
+                  href="/employee/{employee.uuid}"
                   class="text-indigo-600 hover:text-indigo-900"
-                  on:click={navigateToEmployee}>
+                  use:link>
                   Detail
                 </a>
               </td>
@@ -64,3 +65,28 @@
     </div>
   </div>
 </div>
+
+<nav
+  class="px-4 py-3 flex items-center justify-between border-t border-gray-200
+  sm:px-6">
+  <div class="flex-1 flex justify-between sm:justify-end">
+    <a
+      href="#"
+      class="relative inline-flex items-center px-4 py-2 border border-gray-300
+      text-sm leading-5 font-medium rounded-md text-gray-700 bg-white
+      hover:text-gray-500 focus:outline-none focus:shadow-outline-blue
+      focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition
+      ease-in-out duration-150">
+      Previous
+    </a>
+    <a
+      href="#"
+      class="ml-3 relative inline-flex items-center px-4 py-2 border
+      border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700
+      bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue
+      focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition
+      ease-in-out duration-150">
+      Next
+    </a>
+  </div>
+</nav>
