@@ -12,18 +12,13 @@
   function valueChange() {
     value = new Date(dateInput.valueAsNumber);
   }
-
-  function logValue() {
-    console.log(value);
-    value = value;
-  }
 </script>
 
 <style>
   input,
   select {
-    @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full
-    py-2 px-4 text-gray-700 leading-tight mb-4;
+    @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded
+    py-2 px-4 text-gray-700 leading-tight mb-4 w-full;
   }
 
   input:focus {
@@ -47,7 +42,7 @@
 {:else if type === 'datetime'}
   <input type="datetime-local" bind:this={dateInput} on:blur={valueChange} />
 {:else if type === 'select'}
-  <select bind:value on:change={logValue}>
+  <select bind:value>
     {#each selectValues as choice}
       <option value={choice.id}>{choice.value}</option>
     {/each}
