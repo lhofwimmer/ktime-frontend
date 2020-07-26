@@ -37,6 +37,10 @@ export async function getEmployees(limit = 20, offset = 0) {
     return get(`${baseurl}/employee/list?limit=${limit}&offset=${offset}`)
 }
 
+export async function getEmployee(uuid) {
+    return get(`${baseurl}/employee/single?uuid=${uuid}`)
+}
+
 export async function createSchedule(schedule) {
     return post(`${baseurl}/schedule/create`, schedule);
 }
