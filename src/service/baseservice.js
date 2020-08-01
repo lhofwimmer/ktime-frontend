@@ -31,6 +31,17 @@ export async function get(url) {
     return validityCheck(response);
 }
 
+export async function del(url) {
+    const reponse = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/jsonp',
+            'Authorization': getStore(authToken)
+        }
+    });
+    return validityCheck(reponse);
+}
+
 async function validityCheck(response) {
     switch (response.status) {
         case 401:

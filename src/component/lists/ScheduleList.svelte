@@ -1,19 +1,19 @@
 <script>
-  // import { getAllSchedules } from "../../service/userservice.js";
-  // import { onMount } from "svelte";
-  import { getAllSchedules } from "../../service/userservice";
+  import { deleteSchedule } from "../../service/userservice";
+  import { createEventDispatcher } from "svelte";
 
   const dateFormatter = new Intl.DateTimeFormat("de-AT");
+  const dispatch = createEventDispatcher();
 
   export let schedules = [];
 
-  let offset = 0;
+  async function executeDeleteSchedule(schedule) {
+    const success = await deleteSchedule(schedule.uuid);
 
-  // onMount(async () => {
-  //   schedules = await getAllSchedules();
-  // });
-
-  function deleteSchedule() {}
+    if (success) {
+      dispatch("deleteschedule", schedule);
+    }
+  }
 </script>
 
 <style>
@@ -63,10 +63,11 @@
               </td>
               <td
                 class="px-6 py-4 whitespace-no-wrap text-right border-b
-                border-gray-200 text-sm leading-5 font-medium">
+                border-gray-200 text-sm leading-5 font-medium cursor-pointer
+                select-none">
                 <span
                   class="text-indigo-600 hover:text-indigo-900"
-                  on:click={deleteSchedule(schedule)}>
+                  on:click={executeDeleteSchedule(schedule)}>
                   Löschen
                 </span>
               </td>

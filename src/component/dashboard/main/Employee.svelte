@@ -8,6 +8,9 @@
   import EditIcon from "../../icons/Edit.svelte";
   import AddScheduleIcon from "../../icons/AddSchedule.svelte";
   import CreateScheduleModal from "../../forms/CreateScheduleModal.svelte";
+  import CalendarIcon from "../../icons/Calendar.svelte";
+
+  const dateFormatter = new Intl.DateTimeFormat("de-AT");
 
   export let id;
   let offset = 0;
@@ -19,6 +22,11 @@
 
   function addSchedule(schedule) {
     schedules = [...schedules, schedule.detail];
+  }
+
+  function deleteSchedule(event) {
+    const schedule = event.detail;
+    schedules = schedules.filter((s) => s !== schedule);
   }
 
   async function awaitSchedules() {
@@ -38,9 +46,17 @@
         sm:leading-9 sm:truncate">
         {result.firstname} {result.lastname}
       </h2>
+      <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap">
+        <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+          <div class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
+            <CalendarIcon />
+          </div>
+          Beigetreten am {dateFormatter.format(employee.entryDate)}
+        </div>
+      </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <span class="hidden sm:block ml-3 shadow-sm rounded-md">
+      <span class="block sm:mr-0 mr-3 shadow-sm rounded-md">
         <button
           type="button"
           class="inline-flex items-center px-4 py-2 border border-gray-300
@@ -90,7 +106,7 @@
     <Shadow size="40" color="#5850ec" unit="px" />
   </div>
 {:then result}
-  <ScheduleList {schedules} />
+  <ScheduleList {schedules} on:deleteschedule={deleteSchedule} />
 {:catch error}
   <p style="color: red">{error.message}</p>
 {/await}

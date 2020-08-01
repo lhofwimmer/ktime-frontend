@@ -1,7 +1,6 @@
-import { post, baseurl, get } from './baseservice.js';
+import { post, baseurl, get, del } from './baseservice.js';
 // import { user } from '../store/stores.js';
 // import { get as getStore } from 'svelte/store'; 
-
 
 export async function login(email, password) {
     return post(`${baseurl}/auth/login`, {
@@ -50,5 +49,9 @@ export async function getSchedules(employeeUUID, limit = 20, offset = 0) {
 }
 
 export async function getAllSchedules(limit = 20, offset = 0) {
-    return get(`${baseurl}/schedule/list?limit=${limit}&offset${offset}`);
+    return get(`${baseurl}/schedule/all?limit=${limit}&offset${offset}`);
+}
+
+export async function deleteSchedule(uuid) {
+    return del(`${baseurl}/schedule/delete?uuid=${uuid}`);
 }
